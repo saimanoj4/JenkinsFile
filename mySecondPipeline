@@ -1,0 +1,26 @@
+pipeline{
+    agent any;
+    stages{
+        stage('clean workspace'){
+            steps{
+                cleanWs()
+            }
+        }
+        stage('Checkout code'){
+            steps{
+            checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/saimanoj4/maven-project']]]
+            }
+        }
+        stage('Build war file'){
+            steps{
+                tool name: 'localMaven', type: 'maven'
+                bat 'mvn package'
+            }
+        }
+        stage('Archiving war file'){
+			steps{
+				archiveArtifacts 'webapp/target/*.war'
+			}
+		}
+    }
+}
