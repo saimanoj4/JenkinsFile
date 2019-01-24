@@ -17,5 +17,10 @@ pipeline{
                 bat 'mvn package'
             }
         }
+		stage('Archiving war file'){
+			steps{
+				archiveArtifacts '**/*.war'
+			}
+		}
     }
 }
