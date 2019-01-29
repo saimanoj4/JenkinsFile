@@ -1,0 +1,21 @@
+pipeline{
+    agent any;
+    stages{
+        stage("Cleaning the workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+         stage("Checking out the code from GIT"){
+            steps{
+                git 'https://github.com/saimanoj4/maven-project.git'
+            }
+        }
+        stage("Packing the war file"){
+            steps{
+                tool name: 'localMaven', type: 'maven'
+                bat 'mvn package'
+            }
+        }
+    }
+}
