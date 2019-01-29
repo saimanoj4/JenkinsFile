@@ -19,7 +19,7 @@ pipeline{
         }
 		stage("Publishing the war file"){
 			steps{
-			archiveArtifacts '**/.war'
+			archiveArtifacts '**/*.war'
 			}
 		}
     }
