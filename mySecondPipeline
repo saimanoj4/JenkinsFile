@@ -21,6 +21,6 @@ pipeline{
 			steps{
 				archiveArtifacts 'webapp/target/*.war'
 			}
-		}
+		} 
     }
 }
