@@ -1,0 +1,15 @@
+node{
+        stage("Cleaning the workspace"){
+                cleanWs()
+        }
+         stage("Checking out the code from GIT"){
+                git 'https://github.com/saimanoj4/maven-project.git'
+        }
+        stage("Packing the war file"){
+                tool name: 'Maven 3.2.8', type: 'maven'
+                bat label: '', script: 'mvn package'
+        }
+		stage("Publishing the war file"){
+			archiveArtifacts '**/*.war'
+		}
+}
